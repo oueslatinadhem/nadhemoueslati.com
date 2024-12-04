@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fugaz One', cursive;
+    font-weight: normal;
+  }
+  
+  p, a, button, span, div {
+    font-family: 'Raleway', sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  a, button {
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    html, a, button {
+      cursor: auto;
+    }
+  }
+
+  .logo-font {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .logo-font {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  will-change: transform;
+}
+
+.noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 150px;
+  opacity: 0.8;
+  mix-blend-mode: overlay;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes noise {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-1px, -1px); }
+  20% { transform: translate(-2px, 1px); }
+  30% { transform: translate(1px, -2px); }
+  40% { transform: translate(-1px, 3px); }
+  50% { transform: translate(-2px, 1px); }
+  60% { transform: translate(3px, 0); }
+  70% { transform: translate(0, 2px); }
+  80% { transform: translate(-3px, 0); }
+  90% { transform: translate(2px, 1px); }
+  100% { transform: translate(1px, 0); }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    will-change: transform, opacity;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-transparent;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-menu-gradient {
+    background: linear-gradient(180deg, rgba(124, 58, 237, 0.9) 0%, rgba(99, 102, 241, 0.9) 100%);
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-scroll-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .mobile-scroll-item {
+    scroll-snap-align: start;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Keep testimonial slider fonts unchanged */
+.bg-white.rounded-2xl.shadow-xl p,
+.bg-white.rounded-2xl.shadow-xl h4 {
+  font-family: inherit;
+}
