@@ -84,9 +84,12 @@ const Hero = () => {
               }}
             >
               <img
-                src="/avatar.png"
+                src="/avatar.webp"
                 alt="Avatar 3D"
                 className="w-full h-full object-cover rounded-3xl"
+                loading="eager"
+                width="500"
+                height="500"
               />
             </motion.div>
           </motion.div>
