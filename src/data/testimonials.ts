@@ -25,7 +25,7 @@ export const testimonials: Testimonial[] = [
     }
   },
   {
-    text: "Nadhem a été un partenaire précieux dans la refonte pour l'un de mes clients. Sa maîtrise de l'UI/UX combinée à sa compréhension de la stratégie de marque a permis de créer une expérience utilisateur en parfaite adéquation avec les valeurs et les objectifs du client. Toujours à l'écoute, il apporte des solutions pertinentes et créatives tout en respectant les délais serrés. Une vraie force dans un projet.",
+    text: "Nous avons avec Nadhem travaillé de manière collaborative à la refonte du site de Point S sur plusieurs mois.\nGrâce à nos nombreux échanges, j'ai pu noter son sens de l'écoute et sa volonté de trouver des solutions rapides et efficaces pour les problèmes que nous rencontrions. Les conseils partagés ainsi que son expertise digitale furent une vraie valeur ajoutée quant au projet.\nCela a fortement contribué à la transformation digitale de notre client.\nUne collaboration très réussie avec un chef de projet fiable et proactif !",
     author: {
       name: "Augustin Bucaille",
       role: ["Digital strategist - Brand architect", "Addretail"],
