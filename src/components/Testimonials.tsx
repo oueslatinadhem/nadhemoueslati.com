@@ -1,63 +1,186 @@
-interface Testimonial {
-  text: string;
-  author: {
-    name: string;
-    role: string[];
-    photo: string;
-    linkedin: string;
-  };
-  company: {
-    logo: string;
-  };
-}
+import React, { useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Linkedin } from 'lucide-react';
+import { testimonials } from '../data/testimonials';
+import { useViewportSlider } from '../hooks/useViewportSlider';
+import { useDragSlider } from '../hooks/useDragSlider';
 
-export const testimonials: Testimonial[] = [
-  {
-    text: "Collaborer avec Nadhem pour la refonte du site institutionnel de Point S a été un vrai plaisir. Il a su gérer un projet complexe avec de nombreuses parties prenantes internationales, tout en maintenant une communication fluide et efficace. Sa capacité à comprendre nos besoins et à les traduire en solutions web robustes est impressionnante. Grâce à lui, notre site est aujourd'hui à la hauteur de nos ambitions globales.",
-    author: {
-      name: "Fabrice Kindel",
-      role: ["International director", "Point S Group"],
-      photo: "/testimonials/fabricekindel.jpeg",
-      linkedin: "https://www.linkedin.com/in/fabrice-kindel-712962/"
-    },
-    company: {
-      logo: "/testimonials/points.png"
+const Testimonials = () => {
+  const {
+    currentIndex,
+    direction,
+    elementRef,
+    setIsHovered,
+    goToNext,
+    goToPrevious,
+    goToSlide
+  } = useViewportSlider({
+    totalSlides: testimonials.length
+  });
+
+  const {
+    isDragging,
+    handleDragStart,
+    handleDragMove,
+    handleDragEnd,
+    handleMouseLeave
+  } = useDragSlider({
+    onNext: goToNext,
+    onPrevious: goToPrevious
+  });
+
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const difference = touchStartX.current - touchEndX.current;
+    if (Math.abs(difference) > 50) {
+      if (difference > 0) {
+        goToNext();
+      } else {
+        goToPrevious();
+      }
     }
-  },
-  {
-    text: "Nous avons avec Nadhem travaillé de manière collaborative à la refonte du site de Point S sur plusieurs mois.\nGrâce à nos nombreux échanges, j'ai pu noter son sens de l'écoute et sa volonté de trouver des solutions rapides et efficaces pour les problèmes que nous rencontrions.\nCela a fortement contribué à la transformation digitale de notre client.\nUne collaboration très réussie avec un chef de projet fiable et proactif !",
-    author: {
-      name: "Augustin Bucaille",
-      role: ["Digital strategist - Brand architect", "Addretail"],
-      photo: "/testimonials/augustinbucaille.jpeg",
-      linkedin: "https://www.linkedin.com/in/augustin-bucaille/"
-    },
-    company: {
-      logo: "/testimonials/adretail.png"
-    }
-  },
-  {
-    text: "Travailler avec Nadhem chez Churchill m'a toujours inspiré confiance. Sur chaque projet, il allie une rigueur technique exemplaire et une compréhension pointue des enjeux SEO. Ses consignes sont claires, appliquées avec méthode, et surtout, il s'assure toujours de partager ses connaissances pour faire monter l'équipe en compétences. Un atout incontournable dans toute équipe de projet.",
-    author: {
-      name: "Cédric Martin",
-      role: ["Account Manager SEO", "Webloom"],
-      photo: "/testimonials/cedricmartin.jpeg",
-      linkedin: "https://www.linkedin.com/in/cédric-martin-a2abb417/"
-    },
-    company: {
-      logo: "/testimonials/webloom.png"
-    }
-  },
-  {
-    text: "Pour la refonte de mon ERP Nadhem a su allier expertise technique et compréhension fine des besoins spécifiques à mon activité. Il a transformé un système dépassé en un outil moderne, intuitif et performant, parfaitement adapté à mes processus. Toujours disponible et réactif, il a su me guider tout au long du projet. Le résultat dépasse mes attentes !",
-    author: {
-      name: "Rafy Goulli",
-      role: ["Expert retraite & gestion de patrimoine", "Retraite conseil"],
-      photo: "/testimonials/rafygoulli.jpeg",
-      linkedin: "https://www.linkedin.com/in/rafy-goulli-aa46076b/"
-    },
-    company: {
-      logo: "/testimonials/retraiteconseil.png"
-    }
-  }
-];
+  };
+
+  return (
+    <section id="temoignages" className="py-24">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <motion.div 
+            className="text-center md:text-left md:w-2/3 relative z-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl text-white mb-4 md:mb-6">Ce que l'on dit de moi…</h2>
+            <p className="text-base md:text-xl text-white/90">
+              Découvrez les témoignages de clients avec qui j'ai eu le plaisir de collaborer sur des projets de création et de refonte web.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: 20, zIndex: -1 }}
+            transition={{ duration: 0.3 }}
+            className="md:w-1/3 relative z-10"
+          >
+            <img
+              src="/nadhemavis.png"
+              alt="Avis clients"
+              className="w-[250px] h-auto object-contain mx-auto transform scale-105"
+            />
+          </motion.div>
+        </div>
+
+        <div 
+          ref={elementRef}
+          className="bg-white/10 backdrop-blur-sm rounded-2xl relative z-20 px-4 md:px-12"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => {
+            setIsHovered(false);
+            handleMouseLeave();
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="p-4 md:p-8">
+            <div 
+              className="relative min-h-[400px] md:min-h-[500px] select-none"
+              onMouseDown={handleDragStart}
+              onMouseMove={handleDragMove}
+              onMouseUp={handleDragEnd}
+              style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0"
+                >
+                  <div className="bg-white rounded-2xl shadow-xl p-4 md:p-8 h-full flex flex-col">
+                    <div className="flex-grow flex items-center justify-center mb-4 md:mb-8">
+                      <p className="text-xs md:text-lg text-gray-700 italic leading-relaxed max-w-3xl text-center">
+                        "{testimonials[currentIndex].text}"
+                      </p>
+                    </div>
+                    
+                    <div className="flex flex-col items-center">
+                      <div className="flex items-center gap-3 md:gap-6 mb-3 md:mb-6">
+                        <img
+                          src={testimonials[currentIndex].author.photo}
+                          alt={testimonials[currentIndex].author.name}
+                          className="w-12 h-12 md:w-24 md:h-24 rounded-full object-cover"
+                          draggable="false"
+                        />
+                        <div>
+                          <h4 className="font-bold text-gray-900 text-sm md:text-xl mb-1 md:mb-2 flex items-center gap-2">
+                            {testimonials[currentIndex].author.name}
+                            <a
+                              href={testimonials[currentIndex].author.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-gray-400 hover:text-gray-600 transition-colors"
+                              aria-label={`LinkedIn de ${testimonials[currentIndex].author.name}`}
+                            >
+                              <Linkedin size={14} className="opacity-60 hover:opacity-100 transition-opacity" />
+                            </a>
+                          </h4>
+                          {testimonials[currentIndex].author.role.map((line, index) => (
+                            <p 
+                              key={index}
+                              className="text-[10px] md:text-sm text-gray-600 uppercase tracking-wide leading-relaxed"
+                            >
+                              {line}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="w-20 h-12 md:w-32 md:h-20 flex items-center justify-center">
+                        <img
+                          src={testimonials[currentIndex].company.logo}
+                          alt="Company logo"
+                          className="max-w-full max-h-full object-contain"
+                          draggable="false"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${
+                    index === currentIndex ? 'bg-white w-4' : 'bg-white/40'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Testimonials;

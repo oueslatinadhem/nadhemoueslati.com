@@ -1,21 +1,20 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Experience from './components/Experience';
+import Certifications from './components/Certifications';
+import TechnicalStack from './components/TechnicalStack';
+import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 import Background from './components/Background';
 import CursorFollower from './components/CursorFollower';
 import BackToTop from './components/BackToTop';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import NotFound from './components/NotFound';
+import CookieConsent from './components/CookieConsent';
 import { Toaster } from 'react-hot-toast';
-
-const Experience = lazy(() => import('./components/Experience'));
-const Certifications = lazy(() => import('./components/Certifications'));
-const TechnicalStack = lazy(() => import('./components/TechnicalStack'));
-const Testimonials = lazy(() => import('./components/Testimonials'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
-const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
-const NotFound = lazy(() => import('./components/NotFound'));
-const CookieConsent = lazy(() => import('./components/CookieConsent'));
 
 function App() {
   const path = window.location.pathname;
@@ -28,39 +27,19 @@ function App() {
             <Header />
             <Hero />
             <About />
-            <Suspense fallback={<div className="min-h-screen" />}>
-              <Experience />
-            </Suspense>
-            <Suspense fallback={<div className="min-h-screen" />}>
-              <Certifications />
-            </Suspense>
-            <Suspense fallback={<div className="min-h-screen" />}>
-              <TechnicalStack />
-            </Suspense>
-            <Suspense fallback={<div className="min-h-screen" />}>
-              <Testimonials />
-            </Suspense>
-            <Suspense fallback={<div className="min-h-screen" />}>
-              <Contact />
-            </Suspense>
+            <Experience />
+            <Certifications />
+            <TechnicalStack />
+            <Testimonials />
+            <Contact />
             <BackToTop />
-            <Suspense fallback={null}>
-              <Footer />
-            </Suspense>
+            <Footer />
           </>
         );
       case '/privacy':
-        return (
-          <Suspense fallback={<div className="min-h-screen" />}>
-            <PrivacyPolicy />
-          </Suspense>
-        );
+        return <PrivacyPolicy />;
       default:
-        return (
-          <Suspense fallback={<div className="min-h-screen" />}>
-            <NotFound />
-          </Suspense>
-        );
+        return <NotFound />;
     }
   };
 
@@ -70,9 +49,7 @@ function App() {
       <CursorFollower />
       <Background />
       <Toaster position="bottom-center" />
-      <Suspense fallback={null}>
-        <CookieConsent />
-      </Suspense>
+      <CookieConsent />
       {renderContent()}
     </div>
   );

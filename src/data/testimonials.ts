@@ -25,7 +25,7 @@ export const testimonials: Testimonial[] = [
     }
   },
   {
-    text: "Nous avons avec Nadhem travaillé de manière collaborative à la refonte du site de Point S sur plusieurs mois.\nGrâce à nos nombreux échanges, j'ai pu noter son sens de l'écoute et sa volonté de trouver des solutions rapides et efficaces pour les problèmes que nous rencontrions. Les conseils partagés ainsi que son expertise digitale furent une vraie valeur ajoutée quant au projet.\nCela a fortement contribué à la transformation digitale de notre client.\nUne collaboration très réussie avec un chef de projet fiable et proactif !",
+    text: "Nous avons avec Nadhem travaillé de manière collaborative à la refonte du site de Point S sur plusieurs mois.\nGrâce à nos nombreux échanges, j'ai pu noter son sens de l'écoute et sa volonté de trouver des solutions rapides et efficaces pour les problèmes que nous rencontrions.\nCela a fortement contribué à la transformation digitale de notre client.\nUne collaboration très réussie avec un chef de projet fiable et proactif !",
     author: {
       name: "Augustin Bucaille",
       role: ["Digital strategist - Brand architect", "Addretail"],
