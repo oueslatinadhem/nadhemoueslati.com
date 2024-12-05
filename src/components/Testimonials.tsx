@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Linkedin, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
 import { useViewportSlider } from '../hooks/useViewportSlider';
 import { useDragSlider } from '../hooks/useDragSlider';
@@ -163,26 +163,6 @@ const Testimonials = () => {
                   </div>
                 </motion.div>
               </AnimatePresence>
-
-              {/* Desktop Navigation Arrows */}
-              <div className="hidden md:block">
-                <motion.button
-                  onClick={goToPrevious}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 bg-white/20 p-3 rounded-full text-white hover:bg-white/30 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <ChevronLeft size={24} />
-                </motion.button>
-                <motion.button
-                  onClick={goToNext}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 bg-white/20 p-3 rounded-full text-white hover:bg-white/30 transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <ChevronRight size={24} />
-                </motion.button>
-              </div>
             </div>
 
             <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">

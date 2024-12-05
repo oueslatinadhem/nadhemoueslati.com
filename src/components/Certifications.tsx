@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { certifications } from '../data/certifications';
 import { useViewportSlider } from '../hooks/useViewportSlider';
 import { useDragSlider } from '../hooks/useDragSlider';
@@ -115,7 +114,7 @@ const Certifications = () => {
                   className="flex flex-col items-center mobile-scroll-item"
                 >
                   <motion.div
-                    className="w-80 h-80 bg-white/20 rounded-xl p-8 flex items-center justify-center mb-6 relative"
+                    className="w-80 h-80 bg-white/20 rounded-xl p-8 flex items-center justify-center relative"
                     whileHover={{ scale: 1.05 }}
                   >
                     <img
@@ -124,38 +123,24 @@ const Certifications = () => {
                       className="w-full h-full object-contain"
                       draggable="false"
                     />
-                    {/* Navigation arrows - visible only on desktop */}
-                    <div className="hidden md:block">
-                      <button
-                        onClick={goToPrevious}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-32 bg-white/20 p-3 rounded-full text-white hover:bg-white/30 transition-colors"
-                      >
-                        <ChevronLeft size={24} />
-                      </button>
-                      <button
-                        onClick={goToNext}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-32 bg-white/20 p-3 rounded-full text-white hover:bg-white/30 transition-colors"
-                      >
-                        <ChevronRight size={24} />
-                      </button>
-                    </div>
                   </motion.div>
-                  <p className="text-white/60 text-base md:text-xl mb-2">{certifications[currentIndex].date}</p>
+
+                  <div className="mt-6 flex justify-center gap-2">
+                    {certifications.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        className={`w-1.5 h-1.5 rounded-full transition-all ${
+                          index === currentIndex ? 'bg-white w-4' : 'bg-white/40'
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <p className="text-white/60 text-base md:text-xl mt-4 mb-2">{certifications[currentIndex].date}</p>
                   <h3 className="text-xl md:text-2xl text-white font-medium text-center">{certifications[currentIndex].title}</h3>
                 </motion.div>
               </AnimatePresence>
-            </div>
-
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-              {certifications.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${
-                    index === currentIndex ? 'bg-white w-4' : 'bg-white/40'
-                  }`}
-                />
-              ))}
             </div>
           </div>
         </div>
