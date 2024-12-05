@@ -49,7 +49,7 @@ export const testimonials: Testimonial[] = [
     }
   },
   {
-    text: "Pour la refonte de mon ERP, Nadhem a su allier expertise technique et compréhension fine des besoins spécifiques à mon activité. Il a transformé un système dépassé en un outil moderne, intuitif et performant, parfaitement adapté à mes processus. Toujours disponible et réactif, il a su me guider tout au long du projet. Le résultat dépasse mes attentes !",
+    text: "Pour la refonte de mon ERP Nadhem a su allier expertise technique et compréhension fine des besoins spécifiques à mon activité. Il a transformé un système dépassé en un outil moderne, intuitif et performant, parfaitement adapté à mes processus. Toujours disponible et réactif, il a su me guider tout au long du projet. Le résultat dépasse mes attentes !",
     author: {
       name: "Rafy Goulli",
       role: ["Expert retraite & gestion de patrimoine", "Retraite conseil"],
