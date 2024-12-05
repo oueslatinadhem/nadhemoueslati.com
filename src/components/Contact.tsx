@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Linkedin, MessageCircle } from 'lucide-react';
-import ContactForm from './contact/ContactForm';
-import MapComponent from './MapComponent';
 import { useClipboard } from '../hooks/useClipboard';
+
+const ContactForm = lazy(() => import('./contact/ContactForm'));
+const MapComponent = lazy(() => import('./MapComponent'));
 
 const Contact = () => {
   const { copyToClipboard } = useClipboard();
@@ -92,29 +93,29 @@ const Contact = () => {
                     <div className="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-white">
                       <MapPin size={24} />
                     </div>
-                    <p className="text-sm md:text-base text-white/90">41 rue des meuniers 75012 PARIS</p>
+                    <p className="text-sm md:text-base text-white/90">Paris 12</p>
                   </div>
                 </div>
                 <div className="absolute top-0 right-0 -z-10">
-                  <style>{`
-                    @media (max-width: 768px) {
-                      .top-0 {
-                        top: 2rem;
-                      }
-                    }
-                  `}</style>
                   <img
                     src="/nadhemcontact.png"
                     alt="Contact"
                     className="w-24 md:w-32 h-auto object-contain"
+                    loading="lazy"
+                    width="128"
+                    height="128"
                   />
                 </div>
               </div>
-              <MapComponent />
+              <Suspense fallback={<div className="h-[300px] bg-white/5 animate-pulse rounded-xl" />}>
+                <MapComponent />
+              </Suspense>
             </div>
           </motion.div>
 
-          <ContactForm />
+          <Suspense fallback={<div className="lg:w-1/2 h-[600px] bg-white/5 animate-pulse rounded-2xl" />}>
+            <ContactForm />
+          </Suspense>
         </div>
       </div>
     </section>
