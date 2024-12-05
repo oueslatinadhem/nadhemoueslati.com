@@ -12,17 +12,19 @@ const ContactForm = () => {
 
     try {
       const form = e.target as HTMLFormElement;
-      const data = new FormData(form);
+      const formData = new FormData(form);
       
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data as any).toString()
+        body: new URLSearchParams(formData as any).toString()
       });
 
       if (response.ok) {
         form.reset();
         window.location.href = '/success.html';
+      } else {
+        throw new Error('Network response was not ok');
       }
     } catch (error) {
       toast.error("Une erreur s'est produite. Veuillez réessayer.", {
@@ -44,7 +46,6 @@ const ContactForm = () => {
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      action="/success.html"
       onSubmit={handleSubmit}
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
