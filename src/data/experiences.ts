@@ -3,7 +3,7 @@ import { StaticImageData } from 'next/image';
 export const experiences = [
   {
     company: "YATEO",
-    years: "2022-2024",
+    years: "2022 - actuel",
     position: "Chef de projet e-commerce",
     location: "PARIS 05",
     type: "CDI",
@@ -16,7 +16,7 @@ export const experiences = [
   },
   {
     company: "Churchill",
-    years: "2019-2022",
+    years: "2018 - 2022",
     position: "Chef de projet web",
     location: "Paris",
     type: "CDI",
@@ -27,32 +27,30 @@ export const experiences = [
     ]
   },
   {
-    company: "Golden Market",
-    years: "2018-2019",
-    position: "Chef de projet web junior",
-    location: "Paris 08",
-    logo: "/logos/golden-market.png",
+    company: "Block-T",
+    years: "2018",
+    position: "Chef de projet conception",
+    location: "Paris - Montreal",
+    logo: "/logos/logoBlockT.png",
     description: [
-      "Gestion de projets web et de maintenance, Wordpress, Prestashop et CMS Propriétaire",
-      "Webdesign et création de contenu."
+      "Gestion du développement d'une DAPP (DEEP-T/Solidity) pour un LMS (Logiciel de gestion de laboratoire) qui enregistre les données brutes sur la blockchain Ethereum afin de garantir l'immuabilité, l'intégrité et la traçabilité de ces dernières."
     ]
   },
   {
     company: "Octopeek",
-    years: "2017",
+    years: "2015 - 2017",
     position: "Chef de projet web junior",
     location: "Enghien les bains",
-    type: "CDD",
+    type: "CDI",
     logo: "/logos/octopeek.png",
     description: [
-      "Stage dans le cadre de la validation du RNCP Open Classrooms.",
-      "Gestion de la maintenance évolutive et corrective du site web.",
-      "Création et intégration d'animations (Adobe animate)."
+      "Maintenance évolutive et corrective du site web de l'entreprise.",
+      "Community Management et production de contenu sur le thème du Big Data."
     ]
   },
   {
     company: "Accenture - Renault",
-    years: "2012-2014",
+    years: "2011 - 2015",
     position: "Incident manager",
     location: "Villiers-Saint-Frédéric",
     logo: "/logos/accenture.png",
