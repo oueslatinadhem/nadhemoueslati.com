@@ -14,7 +14,6 @@
   
   html {
     scroll-behavior: smooth;
-    cursor: none;
     overflow-x: hidden;
   }
 
@@ -22,16 +21,6 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-  }
-
-  a, button {
-    cursor: none;
-  }
-
-  @media (max-width: 768px) {
-    html, a, button {
-      cursor: auto;
-    }
   }
 
   .logo-font {
